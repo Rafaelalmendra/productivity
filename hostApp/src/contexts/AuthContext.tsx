@@ -6,13 +6,13 @@ import React, {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
-type User = {
-  name: string;
-};
+// types
+import { UserType } from "../types";
 
 type AuthContextType = {
-  user: User | undefined;
+  user: UserType | undefined;
   signInUser: (name: string) => Promise<void>;
   signOutUser: () => Promise<void>;
 };
@@ -25,37 +25,32 @@ const AuthContext = createContext({} as AuthContextType);
 
 const AuthContextProvider = (props: AuthContextTypeProviderProps) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<UserType>();
+
+  useEffect(() => {
+    const localStorageUser = localStorage.getItem("user");
+
+    if (!localStorageUser) {
+      signOutUser();
+      return;
+    }
+
+    setUser(JSON.parse(localStorageUser));
+  }, []);
 
   const signInUser = async (name: string) => {
-    setUser({ name });
-    localStorage.setItem("user", JSON.stringify({ name }));
+    const id = uuidv4();
+
+    setUser({ name, id });
+    localStorage.setItem("user", JSON.stringify({ name, id }));
 
     navigate("/todo");
   };
 
   const signOutUser = async () => {
     setUser(undefined);
-    localStorage.removeItem("user");
     navigate("/");
   };
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (!!user) {
-      setUser(JSON.parse(user));
-      return;
-    }
-
-    signOutUser();
-  }, []);
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
 
   return (
     <AuthContext.Provider value={{ user, signInUser, signOutUser }}>

@@ -2,9 +2,6 @@ import React from "react";
 import { Suspense } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-// contexts
-import { AuthContextProvider } from "../contexts";
-
 // views
 import { LoginView } from "../views";
 
@@ -21,32 +18,26 @@ const AppRoutes = () => {
   const todoAppKey = Math.random();
 
   return (
-    <BrowserRouter>
-      <AuthContextProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout>
-                <LoginView />
-              </Layout>
-            }
-          />
-          <Route
-            path="/todo/*"
-            element={
-              <Suspense key={todoAppKey} fallback={"loading..."}>
-                <ErrorBoundary>
-                  <Layout>
-                    <TodoApp />
-                  </Layout>
-                </ErrorBoundary>
-              </Suspense>
-            }
-          />
-        </Routes>
-      </AuthContextProvider>
-    </BrowserRouter>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <LoginView />
+          </Layout>
+        }
+      />
+      <Route
+        path="/todo/*"
+        element={
+          <Suspense key={todoAppKey} fallback={"loading..."}>
+            <ErrorBoundary>
+              <TodoApp />
+            </ErrorBoundary>
+          </Suspense>
+        }
+      />
+    </Routes>
   );
 };
 

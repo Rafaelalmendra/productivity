@@ -44,11 +44,15 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
+        host: "host@http://localhost:3000/remoteEntry.js",
         todoApp: "todoApp@http://localhost:3001/remoteEntry.js",
       },
       exposes: {
         "./Header": "./src/components",
         "./Footer": "./src/components",
+        "./Layout": "./src/components",
+        "./AuthContextProvider": "./src/contexts",
+        "./useAuth": "./src/contexts",
       },
       shared: {
         ...deps,
