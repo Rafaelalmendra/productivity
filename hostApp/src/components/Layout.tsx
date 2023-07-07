@@ -8,14 +8,13 @@ import { Footer, Header, LoginHeader } from "./index";
 
 type LayoutProps = {
   isLogin?: boolean;
-  user?: UserType;
   children: React.ReactNode;
 };
 
-const Layout = ({ isLogin = false, user, children }: LayoutProps) => {
+const Layout = ({ isLogin = false, children }: LayoutProps) => {
   return (
     <div className="w-full min-h-screen flex flex-col">
-      {isLogin ? <LoginHeader /> : <Header userName={user?.name} />}
+      {isLogin ? <LoginHeader /> : <Header />}
       {children}
       <Footer />
     </div>

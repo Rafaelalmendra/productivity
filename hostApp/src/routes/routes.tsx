@@ -28,7 +28,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/todo/*"
+        path="/todo"
         element={
           <Suspense key={todoAppKey} fallback={"loading..."}>
             <ErrorBoundary>

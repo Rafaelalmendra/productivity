@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 // types
@@ -25,13 +25,21 @@ const AuthContext = createContext({} as AuthContextType);
 
 const AuthContextProvider = (props: AuthContextTypeProviderProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState<UserType>();
 
   useEffect(() => {
     const localStorageUser = localStorage.getItem("user");
 
     if (!localStorageUser) {
-      signOutUser();
+      setUser(undefined);
+      localStorage.removeItem("user");
+
+      if (location.pathname !== "/") {
+        navigate("/");
+        navigate(0);
+      }
+
       return;
     }
 
@@ -49,7 +57,9 @@ const AuthContextProvider = (props: AuthContextTypeProviderProps) => {
 
   const signOutUser = async () => {
     setUser(undefined);
+    localStorage.removeItem("user");
     navigate("/");
+    navigate(0);
   };
 
   return (
