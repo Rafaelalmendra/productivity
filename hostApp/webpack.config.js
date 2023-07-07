@@ -52,6 +52,7 @@ module.exports = (_, argv) => ({
       },
       exposes: {
         "./Header": "./src/components",
+        "./Sidebar": "./src/components",
         "./Footer": "./src/components",
         "./Layout": "./src/components",
         "./AuthContextProvider": "./src/contexts",

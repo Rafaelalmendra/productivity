@@ -6,8 +6,10 @@ import { Layout } from "host/Layout";
 const HomeView = () => {
   return (
     <Layout>
-      <div className="pt-[400px] text-gray-800">
-        <h1>Home</h1>
+      <div className="mt-4">
+        <h1 className="font-bold text-gray-600 text-3xl text-gray-800">
+          Lista de tarefas
+        </h1>
       </div>
     </Layout>
   );

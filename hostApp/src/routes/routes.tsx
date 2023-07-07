@@ -19,14 +19,7 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <Layout>
-            <LoginView />
-          </Layout>
-        }
-      />
+      <Route path="/" element={<LoginView />} />
       <Route
         path="/todo"
         element={

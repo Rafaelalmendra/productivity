@@ -1,10 +1,7 @@
 import React from "react";
 
-// types
-import { UserType } from "../types";
-
 // components
-import { Footer, Header, LoginHeader } from "./index";
+import { Footer, Header, Sidebar } from "./index";
 
 type LayoutProps = {
   isLogin?: boolean;
@@ -13,9 +10,16 @@ type LayoutProps = {
 
 const Layout = ({ isLogin = false, children }: LayoutProps) => {
   return (
-    <div className="w-full min-h-screen flex flex-col">
-      {isLogin ? <LoginHeader /> : <Header />}
-      {children}
+    <div className="w-full min-h-screen flex flex-row gap-8">
+      {isLogin && <Header />}
+      {!isLogin && (
+        <div className="w-2/12 h-[100vh]">
+          <Sidebar />
+        </div>
+      )}
+
+      <div className="w-full h-full">{children}</div>
+
       <Footer />
     </div>
   );
