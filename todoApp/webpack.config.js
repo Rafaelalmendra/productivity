@@ -50,7 +50,7 @@ module.exports = (_, argv) => ({
         host:
           argv.mode === "development"
             ? "host@http://localhost:3000/remoteEntry.js"
-            : "https://todoapp-productivity.vercel.app/remoteEntry.js",
+            : "host@https://todoapp-productivity.vercel.app/remoteEntry.js",
       },
       exposes: {
         "./TodoApp": "./src/TodoApp",
