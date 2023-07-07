@@ -47,8 +47,14 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        host: "host@http://localhost:3000/remoteEntry.js",
-        todoApp: "todoApp@http://localhost:3001/remoteEntry.js",
+        host:
+          argv.mode === "development"
+            ? "host@http://localhost:3000/remoteEntry.js"
+            : "https://hostapp-productivity.vercel.app/remoteEntry.js",
+        todoApp:
+          argv.mode === "development"
+            ? "todoApp@http://localhost:3001/remoteEntry.js"
+            : "https://todoapp-productivity.vercel.app/remoteEntry.js",
       },
       exposes: {
         "./Header": "./src/components",
@@ -72,6 +78,7 @@ module.exports = (_, argv) => ({
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
+      publicPath: "/",
     }),
   ],
 });
