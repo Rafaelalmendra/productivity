@@ -69,7 +69,6 @@ module.exports = (_, argv) => ({
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
-      publicPath: "/todo",
     }),
   ],
 });
