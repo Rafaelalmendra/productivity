@@ -16,8 +16,8 @@ module.exports = {
             "./FinanceApp": "./src/pages/index.js",
           },
           extraOptions: {
-            exposePages: true,
-            skipSharingNextInternals: true,
+            // exposePages: true,
+            // skipSharingNextInternals: true,
           },
           shared: {
             ...deps,

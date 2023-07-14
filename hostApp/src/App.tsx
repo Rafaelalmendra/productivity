@@ -1,8 +1,5 @@
 import React from "react";
 
-// contexts
-import AuthContextProvider from "host/AuthContextProvider";
-
 // routes
 import { AppRoutes } from "./routes";
 
@@ -10,11 +7,7 @@ import { AppRoutes } from "./routes";
 import "./index.scss";
 
 const App = () => {
-  return (
-    <AuthContextProvider>
-      <AppRoutes />
-    </AuthContextProvider>
-  );
+  return <AppRoutes />;
 };
 
 export default App;
