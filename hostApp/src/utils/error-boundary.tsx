@@ -20,6 +20,8 @@ class ErrorBoundary extends React.Component<any, MyComponentState> {
 
   render() {
     if (this.state.hasError) {
+      console.log("cai aqui!");
+
       return <p>Erro ao carregar arquivo</p>;
     }
 

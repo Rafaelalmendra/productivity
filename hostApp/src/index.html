@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Productive</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
+  <noscript id="__next_css__DO_NOT_USE__"></noscript>
 
   <body>
-    <div id="app" className="dark"></div>
+    <div id="root" className="dark"></div>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
   </body>
 </html>

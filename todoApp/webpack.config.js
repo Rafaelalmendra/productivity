@@ -1,24 +1,26 @@
+const deps = require("./package.json").dependencies;
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
-const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
+  cache: true,
+  entry: {
+    index: "./src/index.ts",
+  },
   output: {
     publicPath:
       argv.mode === "development"
         ? "http://localhost:3001/"
         : "https://todoapp-productivity.vercel.app/",
   },
-
-  resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
-  },
-
   devServer: {
     port: 3001,
     historyApiFallback: true,
   },
-
+  mode: "development",
+  resolve: {
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+  },
   module: {
     rules: [
       {
@@ -53,21 +55,24 @@ module.exports = (_, argv) => ({
             : "host@https://todoapp-productivity.vercel.app/remoteEntry.js",
       },
       exposes: {
-        "./TodoApp": "./src/TodoApp",
+        "./TodoApp": "./src/App",
       },
       shared: {
         ...deps,
         react: {
+          eager: true,
           singleton: true,
           requiredVersion: deps.react,
         },
         "react-dom": {
+          eager: true,
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
       },
     }),
     new HtmlWebPackPlugin({
+      title: "Productive | Todo",
       template: "./src/index.html",
     }),
   ],

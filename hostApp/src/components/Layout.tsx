@@ -1,28 +1,26 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 // components
 import { Footer, Header, Sidebar } from "./index";
 
 type LayoutProps = {
-  isLogin?: boolean;
   children: React.ReactNode;
 };
 
-const Layout = ({ isLogin = false, children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
+  const location = useLocation();
+
   return (
     <div className="w-full min-h-screen flex flex-row gap-8">
-      {isLogin && <Header />}
-      {!isLogin && (
-        <div className="w-2/12 h-[100vh]">
-          <Sidebar />
-        </div>
-      )}
+      {location.pathname === "/" && <Header />}
+      {location.pathname !== "/" && <Sidebar />}
 
-      <div className="w-full h-full">{children}</div>
+      <div className="w-full min-h-screen">{children}</div>
 
       <Footer />
     </div>
   );
 };
 
-export { Layout };
+export default Layout;

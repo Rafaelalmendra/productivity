@@ -1,9 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
 
 // contexts
-import { AuthContextProvider } from "host/AuthContextProvider";
+import AuthContextProvider from "host/AuthContextProvider";
 
 // routes
 import { AppRoutes } from "./routes";
@@ -13,11 +11,10 @@ import "./index.scss";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <AuthContextProvider>
-        <AppRoutes />
-      </AuthContextProvider>
-    </BrowserRouter>
+    <AuthContextProvider>
+      <AppRoutes />
+    </AuthContextProvider>
   );
 };
-ReactDOM.render(<App />, document.getElementById("app"));
+
+export default App;

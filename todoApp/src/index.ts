@@ -1,1 +1,1 @@
-import("./TodoApp");
+import("./bootstrap");

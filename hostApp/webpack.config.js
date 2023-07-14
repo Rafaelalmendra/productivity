@@ -1,24 +1,26 @@
+const deps = require("./package.json").dependencies;
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
-const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
+  cache: true,
+  entry: {
+    index: "./src/index.ts",
+  },
   output: {
     publicPath:
       argv.mode === "development"
         ? "http://localhost:3000/"
         : "https://hostapp-productivity.vercel.app/",
   },
-
-  resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
-  },
-
   devServer: {
     port: 3000,
     historyApiFallback: true,
   },
-
+  mode: "development",
+  resolve: {
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+  },
   module: {
     rules: [
       {
@@ -39,9 +41,16 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.jsx?$/,
+        loader: require.resolve("babel-loader"),
+        exclude: /node_modules/,
+        options: {
+          presets: [require.resolve("@babel/preset-react")],
+        },
+      },
     ],
   },
-
   plugins: [
     new ModuleFederationPlugin({
       name: "host",
@@ -55,28 +64,36 @@ module.exports = (_, argv) => ({
           argv.mode === "development"
             ? "todoApp@http://localhost:3001/remoteEntry.js"
             : "todoApp@https://todoapp-productivity.vercel.app/remoteEntry.js",
+        financeApp:
+          argv.mode === "development"
+            ? "financeApp@http://localhost:3002/_next/static/chunks/remoteEntry.js"
+            : "financeApp@http://localhost:3002/_next/static/chunks/remoteEntry.js", //change this
       },
       exposes: {
-        "./Header": "./src/components",
-        "./Sidebar": "./src/components",
-        "./Footer": "./src/components",
-        "./Layout": "./src/components",
-        "./AuthContextProvider": "./src/contexts",
-        "./useAuth": "./src/contexts",
+        "./Header": "./src/components/Header.tsx",
+        "./Sidebar": "./src/components/Sidebar.tsx",
+        "./Footer": "./src/components/Footer.tsx",
+        "./Layout": "./src/components/Layout.tsx",
+        "./AuthContext": "./src/contexts/AuthContext.tsx",
+        "./AuthContextProvider": "./src/contexts/AuthContextProvider.tsx",
+        "./useAuth": "./src/hooks/useAuth.tsx",
       },
       shared: {
         ...deps,
         react: {
+          eager: true,
           singleton: true,
           requiredVersion: deps.react,
         },
         "react-dom": {
+          eager: true,
           singleton: true,
-          requiredVersion: deps["react-dom"],
+          requiredVersion: deps.react,
         },
       },
     }),
     new HtmlWebPackPlugin({
+      title: "Productive | Login",
       template: "./src/index.html",
     }),
   ],
