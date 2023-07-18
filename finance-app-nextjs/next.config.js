@@ -17,13 +17,13 @@ module.exports = {
           },
           extraOptions: {
             // exposePages: true,
-            // skipSharingNextInternals: true,
+            skipSharingNextInternals: true,
           },
           shared: {
             ...deps,
             react: {
-              singleton: true,
-              requiredVersion: deps.react,
+              singleton: false,
+              requiredVersion: false,
             },
           },
         })
