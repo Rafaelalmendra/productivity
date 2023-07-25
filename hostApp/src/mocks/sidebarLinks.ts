@@ -1,18 +1,13 @@
 const sidebarLinks = [
   {
+    id: 0,
+    title: "Home",
+    link: "/home",
+  },
+  {
     id: 1,
-    title: "Lista de tarefas",
-    link: "/todo",
-  },
-  {
-    id: 2,
-    title: "Finanças",
-    link: "/finance",
-  },
-  {
-    id: 2,
-    title: "Lista de compras",
-    link: "/shoppingList",
+    title: "Product A",
+    link: "/product-a",
   },
 ];
 

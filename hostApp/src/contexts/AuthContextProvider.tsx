@@ -45,7 +45,7 @@ const AuthContextProvider = (props: AuthContextTypeProviderProps) => {
     const id = uuidv4();
     setUser({ id, name });
     localStorage.setItem("user", JSON.stringify({ name, id }));
-    navigate("/todo");
+    navigate("/home");
   };
 
   const signOutUser = async () => {

@@ -2,18 +2,23 @@ import React from "react";
 
 // contexts
 import useAuth from "host/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const HomeView = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div className="mt-8">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-4">
-          <h1 className="font-bold text-3xl text-gray-800">Lista de tarefas</h1>
+          <h1 className="font-bold text-3xl text-gray-800">Product A</h1>
 
-          <div className="flex items-center justify-center py-2 px-4 rounded bg-primary-600 text-white">
-            React App
+          <div
+            className="flex items-center justify-center py-2 px-4 rounded bg-primary-600 text-white cursor-pointer"
+            onClick={() => navigate("/product-a/details")}
+          >
+            Details Page
           </div>
         </div>
         <p className="text-gray-700">

@@ -1,5 +1,6 @@
-declare module "todoApp/TodoApp";
+declare module "productA/App";
 declare module "financeApp/FinanceApp";
 declare module "host/AuthContext";
 declare module "host/AuthContextProvider";
 declare module "host/useAuth";
+declare module "productB/App";

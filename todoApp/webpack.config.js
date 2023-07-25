@@ -55,7 +55,7 @@ module.exports = (_, argv) => ({
             : "host@https://todoapp-productivity.vercel.app/remoteEntry.js",
       },
       exposes: {
-        "./TodoApp": "./src/App",
+        "./App": "./src/App",
       },
       shared: {
         ...deps,

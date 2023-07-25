@@ -60,14 +60,10 @@ module.exports = (_, argv) => ({
           argv.mode === "development"
             ? "host@http://localhost:3000/remoteEntry.js"
             : "host@https://hostapp-productivity.vercel.app/remoteEntry.js",
-        todoApp:
+        productA:
           argv.mode === "development"
             ? "todoApp@http://localhost:3001/remoteEntry.js"
             : "todoApp@https://todoapp-productivity.vercel.app/remoteEntry.js",
-        financeApp:
-          argv.mode === "development"
-            ? "financeApp@http://localhost:3002/_next/static/chunks/remoteEntry.js"
-            : "financeApp@http://localhost:3002/_next/static/chunks/remoteEntry.js", //change this
       },
       exposes: {
         "./Header": "./src/components/Header.tsx",

@@ -3,35 +3,25 @@ import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 // views
-import { LoginView } from "../views";
+import { HomeView, LoginView } from "../views";
 
 // utils
 import { ErrorBoundary } from "../utils";
 
 // pages
-const TodoMicroFrontend = React.lazy(() => import("todoApp/TodoApp"));
-const FinanceMicroFrontend = React.lazy(() => import("financeApp/FinanceApp"));
+const TodoMicroFrontend = React.lazy(() => import("productA/App"));
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginView />} />
+      <Route path="/home" element={<HomeView />} />
       <Route
-        path="/todo"
+        path="/product-a/*"
         element={
           <Suspense fallback={"loading..."}>
             <ErrorBoundary>
               <TodoMicroFrontend />
-            </ErrorBoundary>
-          </Suspense>
-        }
-      />
-      <Route
-        path="/finance"
-        element={
-          <Suspense fallback={"loading..."}>
-            <ErrorBoundary>
-              <FinanceMicroFrontend />
             </ErrorBoundary>
           </Suspense>
         }

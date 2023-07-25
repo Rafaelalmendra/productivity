@@ -15,7 +15,7 @@ const Sidebar = () => {
     <div className="w-1/5 min-h-screen px-4 py-2 text-center bg-gray-900">
       <div className=" text-gray-100 ">
         <div className="flex flex-col items-start justify-start p-2.5 mt-1 gap-2">
-          <h1 className="font-bold text-3xl text-blue-500">Productive</h1>
+          <h1 className="font-bold text-3xl text-blue-500">Platform</h1>
           <p className="text-base">
             {user?.name ? user?.name : "Usuário não encontrado"}
           </p>

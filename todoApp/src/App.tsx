@@ -1,13 +1,13 @@
 import React from "react";
 
 // views
-import { HomeView } from "./views";
 
 // styles
 import "./index.scss";
+import { Routers } from "./routes";
 
 const TodoApp = () => {
-  return <HomeView />;
+  return <Routers />;
 };
 
 export default TodoApp;
