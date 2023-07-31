@@ -11,10 +11,10 @@ const DetailsView = () => {
         <h1 className="font-bold text-3xl text-gray-800">Details page</h1>
 
         <div
-          className="flex items-center justify-center py-2 px-4 rounded bg-primary-600 text-white cursor-pointer"
+          className="flex w-20 items-center justify-center py-2 px-4 rounded bg-primary-600 text-white cursor-pointer"
           onClick={() => navigate("/product-a")}
         >
-          Home page
+          Home
         </div>
       </div>
     </div>

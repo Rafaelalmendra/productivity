@@ -7,6 +7,7 @@ const root = createRoot(container);
 
 // contexts
 import AuthContextProvider from "host/AuthContextProvider";
+import { UserProvider } from "host/UserAuth";
 
 // components
 import Layout from "./components/Layout";
@@ -15,10 +16,12 @@ import App from "./App";
 
 root.render(
   <BrowserRouter>
-    <AuthContextProvider>
-      <Layout>
-        <App />
-      </Layout>
-    </AuthContextProvider>
+    <UserProvider>
+      <AuthContextProvider>
+        <Layout>
+          <App />
+        </Layout>
+      </AuthContextProvider>
+    </UserProvider>
   </BrowserRouter>
 );

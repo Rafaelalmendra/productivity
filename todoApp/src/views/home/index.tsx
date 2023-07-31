@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // contexts
-import useAuth from "host/useAuth";
+// import useAuth from "host/useAuth";
+import { useUser } from "host/UserAuth";
 import { useNavigate } from "react-router-dom";
 
 const HomeView = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useUser();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(isAuthenticated());
+  }, []);
 
   return (
     <div className="mt-8">
@@ -18,7 +23,7 @@ const HomeView = () => {
             className="flex items-center justify-center py-2 px-4 rounded bg-primary-600 text-white cursor-pointer"
             onClick={() => navigate("/product-a/details")}
           >
-            Details Page
+            Details
           </div>
         </div>
         <p className="text-gray-700">

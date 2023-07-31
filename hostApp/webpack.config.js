@@ -73,6 +73,7 @@ module.exports = (_, argv) => ({
         "./AuthContext": "./src/contexts/AuthContext.tsx",
         "./AuthContextProvider": "./src/contexts/AuthContextProvider.tsx",
         "./useAuth": "./src/hooks/useAuth.tsx",
+        "./UserAuth": "./src/contexts/UserAuth.tsx",
       },
       shared: {
         ...deps,

@@ -2,14 +2,34 @@ import React, { useState } from "react";
 
 // contexts
 import useAuth from "host/useAuth";
+import { useUser, useName } from "host/UserAuth";
+import { useNavigate } from "react-router-dom";
 
 const LoginView = () => {
+  const navigate = useNavigate();
   const { signInUser } = useAuth();
   const [userName, setUserName] = useState<string>("");
+  const { setUser } = useUser();
+  // const { setName } = useUser();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Mudando...");
     setUserName(event.target.value);
+    setUser(event.target.value);
   };
+
+  function login() {
+    if (userName === "admin" || userName === "member") {
+      const user = {
+        name: userName,
+        email: "user@email.com",
+        token: "abc123",
+      };
+      localStorage.setItem("user", JSON.stringify(user));
+      setUser(user);
+      navigate("/home");
+    }
+  }
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -42,7 +62,10 @@ const LoginView = () => {
                 type="submit"
                 disabled={!userName}
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                onClick={() => signInUser(userName)}
+                onClick={() => {
+                  // signInUser(userName);
+                  login();
+                }}
               >
                 Entrar
               </button>

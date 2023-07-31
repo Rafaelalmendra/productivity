@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 // contexts
 import AuthContextProvider from "host/AuthContextProvider";
+import { UserProvider } from "host/UserAuth";
 
 import App from "./App";
 
@@ -12,8 +13,10 @@ const root = createRoot(container);
 
 root.render(
   <BrowserRouter>
-    <AuthContextProvider>
-      <App />
-    </AuthContextProvider>
+    <UserProvider>
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </UserProvider>
   </BrowserRouter>
 );

@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 // contexts
 import useAuth from "host/useAuth";
+import { useUser } from "host/UserAuth";
 
 // mocks
 import { sidebarLinks } from "../mocks";
 
 const Sidebar = () => {
   const location = useLocation();
-  const { user, signOutUser } = useAuth();
+  // const { user, signOutUser } = useAuth();
+  const { user, logout } = useUser();
+  const [items, setItems] = useState<any>([]);
+
+  useEffect(() => {
+    if (user?.name === "admin") {
+      setItems([
+        ...sidebarLinks,
+        {
+          id: 2,
+          title: "New Option",
+          link: "/new-option",
+        },
+      ]);
+    } else {
+      setItems(sidebarLinks);
+    }
+  }, []);
 
   return (
     <div className="w-1/5 min-h-screen px-4 py-2 text-center bg-gray-900">
@@ -25,7 +43,7 @@ const Sidebar = () => {
 
       <div className="flex flex-col justify-between items-start">
         <div className="w-full">
-          {sidebarLinks.map((link) => (
+          {items.map((link): any => (
             <React.Fragment key={link.id}>
               <Link to={link.link}>
                 <div
@@ -44,7 +62,7 @@ const Sidebar = () => {
 
         <div
           className="w-full mt-14 py-4 flex rounded-md duration-300 cursor-pointer hover:bg-blue-600 text-white"
-          onClick={signOutUser}
+          onClick={logout}
         >
           <span className=" ml-4 text-gray-200 font-bold">Sair</span>
         </div>
